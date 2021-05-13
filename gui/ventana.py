@@ -3,10 +3,16 @@ from tkinter import *
 def d_nodo(event):
     print("click izquierdo")
     global x,y
+    x = event.x
+    y = event.y
+    print("(",+x,",",+y,")")
 
 def d_arista(event):
     print("click derecho")
     global x,y
+    x = event.x
+    y = event.y
+    print("(",+x,",",+y,")")
 
 ventana = Tk()
 lienzo = Canvas(ventana,width=640,height=480,background='light blue')
