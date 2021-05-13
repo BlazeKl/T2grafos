@@ -1,19 +1,32 @@
 from tkinter import *
 
+
+global click
+
 def d_nodo(event):
-    print("click izquierdo")
     global x,y
+    print("click izquierdo")
     x = event.x
     y = event.y
     print("(",+x,",",+y,")")
+    lienzo.create_oval(x-10,y-10,x+10,y+10,fill='black')
 
 def d_arista(event):
-    print("click derecho")
     global x,y
-    x = event.x
-    y = event.y
-    print("(",+x,",",+y,")")
+    global click
+    print("click derecho")
+    if click:
+        lienzo.create_line(x,y,event.x,event.y,fill='black',width=2)
+        print("(",+event.x,",",+event.y,")")
+        click=0
+    else:
+        x = event.x
+        y = event.y
+        print("(",+x,",",+y,")")
+        click=1
 
+
+click=0
 ventana = Tk()
 lienzo = Canvas(ventana,width=640,height=480,background='light blue')
 lienzo.grid(row=0,column=0)
