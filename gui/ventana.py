@@ -5,7 +5,7 @@ global click
 
 def d_nodo(event):
     global x,y,nodos
-    print("click izquierdo")
+    print("Insertando nodo N ",+nodos)
     x = event.x
     y = event.y
     print("(",+x,",",+y,")")
@@ -16,13 +16,14 @@ def d_nodo(event):
 def d_arista(event):
     global x,y
     global click
-    print("click derecho")
     if click:
+        print("insertando arista (end)")
         arist = lienzo.create_line(x,y,event.x,event.y,fill='black',width=2)
         lienzo.tag_lower(arist)
         print("(",+event.x,",",+event.y,")")
         click=0
     else:
+        print("insertando arista (start)")
         x = event.x
         y = event.y
         print("(",+x,",",+y,")")
