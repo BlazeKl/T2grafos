@@ -29,7 +29,14 @@ def d_arista(event):
         print("(",+x,",",+y,")")
         click=1
 
+def matriz_ady():
+    print("funcion para mostrar matriz de adyacencia")
+
+def menu_algoritmos():
+    print("funcion para mostrar menu de algoritmos")
+
 #area de pruebas
+global x
 x = grafo(2)
 x.add_n(6,0,0)
 x.add_n(3,0,1)
@@ -41,7 +48,13 @@ x.print_mat()
 nodos=0
 click=0
 ventana = Tk()
+ventana.geometry('640x510')
+ventana.title('Editor de grafos')
 lienzo = Canvas(ventana,width=640,height=480,background='light blue')
-lienzo.grid(row=0,column=0)
+lienzo.place(x=0,y=0)
 lienzo.bind('<Button-1>',d_nodo)
+btn_1 = Button(ventana,text="Adyacencia",command=matriz_ady)
+btn_1.place(x=0,y=482)
+btn_2 = Button(ventana,text="Operaciones",command=menu_algoritmos)
+btn_2.place(x=93,y=482)
 ventana.mainloop()
