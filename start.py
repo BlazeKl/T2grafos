@@ -36,13 +36,13 @@ def menu_algoritmos():
     print("funcion para mostrar menu de algoritmos")
 
 #area de pruebas
-global x
-x = grafo(2)
-x.add_n(6,0,0)
-x.add_n(3,0,1)
-x.add_n(4,1,0)
-x.add_n(5,1,1)
-x.print_mat()
+global graf1
+graf1 = grafo(2)
+graf1.add_n(6,0,0)
+graf1.add_n(3,0,1)
+graf1.add_n(4,1,0)
+graf1.add_n(5,1,1)
+graf1.print_mat()
 
 #inicio ventana
 nodos=0
