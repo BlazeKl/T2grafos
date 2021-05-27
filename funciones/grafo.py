@@ -1,4 +1,4 @@
-import random
+#import random
 #d=4;
 #r1=1;
 #r2=4;
@@ -22,3 +22,6 @@ class grafo:
 
     def get_n(self,i,j):
         return self.g_matr[i][j]
+
+    def print_mat(self):
+        print(self.g_matr)
