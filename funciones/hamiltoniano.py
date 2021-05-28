@@ -1,0 +1,1 @@
+from clasegrafo import grafo

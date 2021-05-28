@@ -1,6 +1,6 @@
 #librerias
 from tkinter import *
-from funciones.grafo import grafo
+from funciones.clasegrafo import grafo
 
 #variables
 global x,y,click,vert,vert_n,aux
