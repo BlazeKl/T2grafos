@@ -1,61 +1,68 @@
 #librerias
-from tkinter import *
+import tkinter as tk
 from funciones.clasegrafo import grafo
 
 #variables
-global x,y,click,vert,i,grafo_n
-x=0
-y=0
-z=0
+global pos_x,pos_y,click,vert,cant_v,j,grafo_n,dorogodo
+pos_x = 0
+pos_y = 0
 click = 0
 vert = [0 for x in range(999)]
-i = 0
+cant_v = 0
+j = 0
 grafo_n = grafo(1000)
+is_dirigido=1
 
 #funciones para canvas
 def add_nodo(event):
-    global vert,i
+    global vert,cant_v
     print("Insertando nodo")
     print("(",+event.x,",",+event.y,")")
-    vert[i] = lienzo.create_oval(event.x-10,event.y-10,event.x+10,event.y+10,fill='black',activeoutline='green',activewidth=3)
-    lienzo.create_text(event.x-13,event.y-13,text=i)
-    lienzo.tag_bind(vert[i],'<Button-3>',lambda event,x=i: add_arista(event,x))
-    i += 1
+    vert[cant_v] = lienzo.create_oval(event.x-10,event.y-10,event.x+10,event.y+10,fill='black',activeoutline='green',activewidth=3)
+    lienzo.create_text(event.x-13,event.y-13,text=cant_v)
+    lienzo.tag_bind(vert[cant_v],'<Button-3>',lambda event,var1 = cant_v,var2 = event.x,var3 = event.y: add_arista(event,var1,var2,var3))
+    cant_v += 1
 
-def add_arista(event,i):
-    global x,y,z,grafo_n
+def add_arista(event,i,x,y):
+    global pos_x,pos_y,j,grafo_n
     global click
     if click:
         print("insertando arista end =",+i)
-        arista = lienzo.create_line(x,y,event.x,event.y,fill='black',width=2)
+        lienzo.pack()
+        if is_dirigido:
+            arista = lienzo.create_line(pos_x,pos_y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2)
+            print("flechita")
+            grafo_n.sum_n(1,i,j)
+        else:
+            arista = lienzo.create_line(pos_x,pos_y,x,y,fill='black',width=2)
+            grafo_n.sum_n(1,i,j)
+            grafo_n.sum_n(1,j,i)
         lienzo.tag_lower(arista)
-        print("(",+event.x,",",+event.y,")")
-        grafo_n.sum_n(1,i,z)
-        grafo_n.sum_n(1,z,i)
+        print("(",+x,",",+y,")")
         click=0
     else:
         print("insertando arista start = ",+i)
-        x = event.x
-        y = event.y
-        z = i
-        print("(",+x,",",+y,")")
+        pos_x = x
+        pos_y = y
+        j = i
+        print("(",+pos_x,",",+pos_y,")")
         click=1
 
 def detalles():
-    menu = Tk()
+    menu = tk.Tk()
     menu.geometry('300x300')
     menu.title('Matriz de adyacencia')
-    btn = Button(menu,text="Salir",command=menu.destroy)
+    btn = tk.Button(menu,text="Salir",command=menu.destroy)
     btn.pack()
     menu.mainloop
     print("funcion para mostrar matriz de adyacencia")
-    grafo_n.print_mat(i)
+    grafo_n.print_mat(cant_v)
 
 def algoritmos():
-    menu = Tk()
+    menu = tk.Tk()
     menu.geometry('300x300')
     menu.title('Algoritmos')
-    btn = Button(menu,text="Salir",command=menu.destroy)
+    btn = tk.Button(menu,text="Salir",command=menu.destroy)
     btn.pack()
     menu.mainloop
     print("funcion para mostrar menu de algoritmos")
@@ -63,14 +70,14 @@ def algoritmos():
 
 def limpiar_canvas(event):
     print("limpiar canvas")
-    global x,y,click,vert,i,grafo_n
+    global pos_x,pos_y,click,vert,cant_v,grafo_n
     lienzo.delete("all")
-    x=0
-    y=0
+    pos_x=0
+    pos_y=0
     z=0
     click = 0
     vert = [0 for x in range(999)]
-    i = 0
+    cant_v = 0
     grafo_n = grafo(1000)
 
 
@@ -78,17 +85,17 @@ def limpiar_canvas(event):
 #def num_reg(x):
 
 #inicio ventana
-ventana = Tk()
+ventana = tk.Tk()
 ventana.geometry('640x510')
 ventana.title('Editor de grafos')
-lienzo = Canvas(ventana,width=640,height=480,background='light blue')
+lienzo = tk.Canvas(ventana,width=640,height=480,background='light blue')
 lienzo.place(x=0,y=0)
 lienzo.bind('<Button-1>',add_nodo)
 lienzo.bind('<Button-2>',limpiar_canvas)
-btn_1 = Button(ventana,text="Adyacencia",command=detalles)
+btn_1 = tk.Button(ventana,text="Adyacencia",command=detalles)
 btn_1.pack()
 btn_1.place(x=0,y=482)
-btn_2 = Button(ventana,text="Operaciones",command=algoritmos)
+btn_2 = tk.Button(ventana,text="Operaciones",command=algoritmos)
 btn_2.pack()
 btn_2.place(x=93,y=482)
 ventana.mainloop()

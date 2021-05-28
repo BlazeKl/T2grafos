@@ -20,3 +20,5 @@ class grafo:
             for j in range (0,limit):
                 print(" ",+self.g_matr[i][j], end = " "),
             print("\n")
+
+
