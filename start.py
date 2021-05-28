@@ -3,34 +3,38 @@ from tkinter import *
 from funciones.clasegrafo import grafo
 
 #variables
-global x,y,click,vert,vert_n,aux
+global x,y,click,vert,i,grafo_n
 click = 0
 vert = [0 for x in range(999)]
-vert_n = 0
+i = 0
+grafo_n = grafo(1000)
 
 #funciones para canvas
 def add_nodo(event):
-    global x,y,vert,vert_n
+    global x,y,vert,i
     print("Insertando nodo")
     print("(",+event.x,",",+event.y,")")
-    vert[vert_n] = lienzo.create_oval(event.x-10,event.y-10,event.x+10,event.y+10,fill='black',activeoutline='green',activewidth=3)
-    lienzo.tag_bind(vert[vert_n],'<Button-3>',lambda event,i=vert_n: add_arista(event,i))
-    vert_n += 1
+    vert[i] = lienzo.create_oval(event.x-10,event.y-10,event.x+10,event.y+10,fill='black',activeoutline='green',activewidth=3)
+    lienzo.create_text(event.x-13,event.y-13,text=i)
+    lienzo.tag_bind(vert[i],'<Button-3>',lambda event,x=i: add_arista(event,x))
+    i += 1
 
 def add_arista(event,i):
-    global x,y
+    global x,y,z,grafo_n
     global click
-    print(i)
     if click:
-        print("insertando arista (end)")
+        print("insertando arista end =",+i)
         arista = lienzo.create_line(x,y,event.x,event.y,fill='black',width=2)
         lienzo.tag_lower(arista)
         print("(",+event.x,",",+event.y,")")
+        grafo_n.sum_n(1,i,z)
+        grafo_n.sum_n(1,z,i)
         click=0
     else:
-        print("insertando arista (start)")
+        print("insertando arista start = ",+i)
         x = event.x
         y = event.y
+        z = i
         print("(",+x,",",+y,")")
         click=1
 
@@ -42,6 +46,7 @@ def detalles():
     btn.pack()
     menu.mainloop
     print("funcion para mostrar matriz de adyacencia")
+    grafo_n.print_mat(i)
 
 def algoritmos():
     menu = Tk()
@@ -53,13 +58,8 @@ def algoritmos():
     print("funcion para mostrar menu de algoritmos")
 
 #area de pruebas
-global graf1
-graf1 = grafo(2)
-graf1.add_n(6,0,0)
-graf1.add_n(3,0,1)
-graf1.add_n(4,1,0)
-graf1.add_n(5,1,1)
-graf1.print_mat()
+#def num_reg(x):
+
 
 #inicio ventana
 ventana = Tk()

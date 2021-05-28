@@ -1,1 +1,3 @@
-from clasegrafo import grafo
+
+def is_hamiltoniano(x):
+    print("algoritmo para hamiltoniano")

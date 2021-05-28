@@ -1,1 +1,3 @@
-from clasegrafo import grafo
+
+def is_euleriano(x):
+    print("algoritmo para euleriano")
