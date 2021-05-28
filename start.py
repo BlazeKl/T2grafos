@@ -30,7 +30,7 @@ def add_arista(event,i,x,y):
         lienzo.pack()
         if is_dirigido.get():
             arista = lienzo.create_line(pos_x,pos_y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2)
-            grafo_n.sum_n(1,i,j)
+            grafo_n.sum_n(1,j,i)
         else:
             arista = lienzo.create_line(pos_x,pos_y,x,y,fill='black',width=2)
             grafo_n.sum_n(1,i,j)
