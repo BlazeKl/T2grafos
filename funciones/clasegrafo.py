@@ -1,5 +1,6 @@
 from .euleriano import is_euleriano
 from .hamiltoniano import is_hamiltoniano
+from .gradosaristas import gradosgrafo
 
 class grafo:
     def __init__(self,N):
@@ -21,4 +22,6 @@ class grafo:
                 print(" ",+self.g_matr[i][j], end = " "),
             print("\n")
 
-
+    def get_grado(self,limit):
+        res = gradosgrafo(self.g_matr,limit)
+        return res

@@ -8,7 +8,7 @@ def gradosgrafo(x,n):
     ngrados=0
     for i in range(0,n):
         for j in range(0,n):
-            if i >= 1:
+            if x[i][j] >= 1:
                 ngrados +=1
     return ngrados
 

@@ -29,10 +29,18 @@ def add_arista(event,i,x,y):
         print("insertando arista end =",+i)
         lienzo.pack()
         if is_dirigido.get():
-            arista = lienzo.create_line(pos_x,pos_y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2)
+            if i == j:
+                print("bucle")
+                arista = lienzo.create_line(x,y,x-50,y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2,smooth=1)
+            else:
+                arista = lienzo.create_line(pos_x,pos_y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2)
             grafo_n.sum_n(1,j,i)
         else:
-            arista = lienzo.create_line(pos_x,pos_y,x,y,fill='black',width=2)
+            if i == j:
+                print("bucle")
+                arista = lienzo.create_line(x,y,x-50,y-50,x,y,fill='black',width=2,smooth=1)
+            else:
+                arista = lienzo.create_line(pos_x,pos_y,x,y,fill='black',width=2)
             grafo_n.sum_n(1,i,j)
             grafo_n.sum_n(1,j,i)
         lienzo.tag_lower(arista)
@@ -49,12 +57,16 @@ def add_arista(event,i,x,y):
 def detalles():
     menu = tk.Tk()
     menu.geometry('300x300')
-    menu.title('Matriz de adyacencia')
+    menu.title('Detalles de grafo')
     btn = tk.Button(menu,text="Salir",command=menu.destroy)
     btn.pack()
     menu.mainloop
-    print("funcion para mostrar matriz de adyacencia")
+    print("matriz de adyacencia")
     grafo_n.print_mat(cant_v)
+    print("grado del grafo: ",+grafo_n.get_grado(cant_v))
+    #grafo_n.get_grado(cant_v) obtiene la cantidad total grado del grafo 
+    cant_aristas = (grafo_n.get_grado(cant_v) // 2)
+    print("Cantidad aristas: ",+cant_aristas) 
 
 def algoritmos():
     menu = tk.Tk()
@@ -90,7 +102,7 @@ lienzo = tk.Canvas(ventana,width=640,height=480,background='light blue')
 lienzo.place(x=0,y=0)
 lienzo.bind('<Button-1>',add_nodo)
 #lienzo.bind('<Button-2>',limpiar_canvas)
-btn_1 = tk.Button(ventana,text="Adyacencia",command=detalles)
+btn_1 = tk.Button(ventana,text="Detalles",command=detalles)
 btn_1.pack()
 btn_1.place(x=0,y=482)
 btn_2 = tk.Button(ventana,text="Operaciones",command=algoritmos)
