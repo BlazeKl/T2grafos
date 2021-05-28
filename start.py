@@ -4,6 +4,9 @@ from funciones.clasegrafo import grafo
 
 #variables
 global x,y,click,vert,i,grafo_n
+x=0
+y=0
+z=0
 click = 0
 vert = [0 for x in range(999)]
 i = 0
@@ -11,7 +14,7 @@ grafo_n = grafo(1000)
 
 #funciones para canvas
 def add_nodo(event):
-    global x,y,vert,i
+    global vert,i
     print("Insertando nodo")
     print("(",+event.x,",",+event.y,")")
     vert[i] = lienzo.create_oval(event.x-10,event.y-10,event.x+10,event.y+10,fill='black',activeoutline='green',activewidth=3)
@@ -59,7 +62,6 @@ def algoritmos():
 
 #area de pruebas
 #def num_reg(x):
-
 
 #inicio ventana
 ventana = Tk()
