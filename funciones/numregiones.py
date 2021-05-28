@@ -5,4 +5,4 @@
 # n es el largo del arreglo, matriz n*n cuadrada
 
 def cantidad_regiones(x,n):
-
+    print("print para callar las advertencias")
