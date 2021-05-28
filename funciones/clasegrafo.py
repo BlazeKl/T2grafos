@@ -1,12 +1,12 @@
-#from .euleriano import is_euleriano
-#from .hamiltoniano import is_hamiltoniano
+from .euleriano import is_euleriano
+from .hamiltoniano import is_hamiltoniano
 
 class grafo:
     def __init__(self,N):
         self.N = N
         self.g_matr = [[0 for x in range(N)] for y in range(N)]
 
-    def add_n(self,x,i,j):
+    def set_n(self,x,i,j):
         self.g_matr[i][j] = x
 
     def sum_n(self,x,i,j):

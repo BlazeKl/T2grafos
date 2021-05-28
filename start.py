@@ -60,6 +60,20 @@ def algoritmos():
     menu.mainloop
     print("funcion para mostrar menu de algoritmos")
 
+
+def limpiar_canvas(event):
+    print("limpiar canvas")
+    global x,y,click,vert,i,grafo_n
+    lienzo.delete("all")
+    x=0
+    y=0
+    z=0
+    click = 0
+    vert = [0 for x in range(999)]
+    i = 0
+    grafo_n = grafo(1000)
+
+
 #area de pruebas
 #def num_reg(x):
 
@@ -70,7 +84,7 @@ ventana.title('Editor de grafos')
 lienzo = Canvas(ventana,width=640,height=480,background='light blue')
 lienzo.place(x=0,y=0)
 lienzo.bind('<Button-1>',add_nodo)
-lienzo.bind('<Button-2>',lambda x="all":print(x))
+lienzo.bind('<Button-2>',limpiar_canvas)
 btn_1 = Button(ventana,text="Adyacencia",command=detalles)
 btn_1.pack()
 btn_1.place(x=0,y=482)
