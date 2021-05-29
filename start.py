@@ -61,8 +61,8 @@ def add_arista(event,i, x, y):
 
 def detalles():
     menu = tk.Tk()
-    menu.geometry('300x300')
     menu.title('Detalles de grafo')
+    menu.resizable(height=0, width=0)
     frame1 = tk.Frame(menu) 
     frame1.pack(side="top", fill="both")
     text = tk.Label(frame1, text="Matriz de adyacencia")
@@ -115,11 +115,11 @@ def detalles():
     print("grado del grafo: ", +grafo_n.get_grado(cant_v))
     print("Cantidad aristas: ", +cant_a) 
     print("Num cromatico: ", grafo_n.do_cromatico(cant_v))
+    print(grafo_n.do_colorear(cant_v))
     
 
 def algoritmos():
     menu = tk.Tk()
-    menu.geometry('300x300')
     menu.title('Algoritmos')
     btn = tk.Button(menu, text="Salir", command=menu.destroy)
     btn.pack()
@@ -142,8 +142,9 @@ def limpiar_canvas():
 
 #inicio ventana
 ventana = tk.Tk()
-ventana.geometry('640x510')
+ventana.geometry('640x510+0+0')
 ventana.title('Editor de grafos')
+ventana.resizable(height=0, width=0)
 frame_canv = tk.Frame(ventana)
 frame_canv.pack(side="top", fill="both")
 lienzo = tk.Canvas(frame_canv, width=640, height=480, background='light blue')
@@ -151,12 +152,12 @@ lienzo.grid(row=0, column=0)
 lienzo.bind('<Button-1>', add_nodo)
 frame_btn = tk.Frame(ventana)
 frame_btn.pack(side="top", fill="both")
-btn_1 = tk.Button(frame_btn, text="Detalles", command=detalles)
-btn_1.grid(row=0, column=0)
-btn_2 = tk.Button(frame_btn, text="Operaciones", command=algoritmos)
-btn_2.grid(row=0, column=1)
-btn_3 = tk.Button(frame_btn, text="Limpiar", command=limpiar_canvas)
-btn_3.grid(row=0, column=2)
+btn= tk.Button(frame_btn, text="Detalles", command=detalles)
+btn.grid(row=0, column=0)
+btn = tk.Button(frame_btn, text="Operaciones", command=algoritmos)
+btn.grid(row=0, column=1)
+btn = tk.Button(frame_btn, text="Limpiar", command=limpiar_canvas)
+btn.grid(row=0, column=2)
 is_dirigido=tk.IntVar()
 cbox_1 = tk.Checkbutton(frame_btn, text="Dirigido", variable=is_dirigido, onvalue=1, offvalue=0, command=limpiar_canvas, fg="green")
 cbox_1.grid(row=0,column=3)

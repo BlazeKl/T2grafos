@@ -2,6 +2,7 @@ from .euleriano import is_euleriano
 from .hamiltoniano import is_hamiltoniano
 from .gradosaristas import gradosgrafo
 from .numcromatico import num_cromatico
+from .colorear import l_colorear
 
 class grafo:
     def __init__(self,N):
@@ -30,3 +31,8 @@ class grafo:
     def do_cromatico(self,limit):
         res = num_cromatico(self.g_matr,limit)
         return res
+
+    def do_colorear(self,limit):
+        res = l_colorear(self.g_matr,limit)
+        return res
+
