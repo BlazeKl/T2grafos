@@ -31,7 +31,8 @@ def l_colorear(x,n):
         cont=0
         for j in range(0,i):
             if x[i][j]==1:
-                cont+=1
+                if arreglo_final[j]==arreglo_colores[cont]:
+                    cont+=1
             arreglo_final[i]=arreglo_colores[cont]
 
     return arreglo_final
