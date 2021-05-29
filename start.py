@@ -19,7 +19,7 @@ def add_nodo(event):
     print("Insertando nodo")
     print("(",+event.x,",",+event.y,")")
     vert[cant_v] = lienzo.create_oval(event.x-10,event.y-10,event.x+10,event.y+10,fill='black',activeoutline='green',activewidth=3)
-    lienzo.create_text(event.x-13,event.y-13,text=cant_v)
+    lienzo.create_text(event.x-13,event.y-13,text=chr(97+cant_v))
     lienzo.tag_bind(vert[cant_v],'<Button-3>',lambda event,var1 = cant_v,var2 = event.x,var3 = event.y: add_arista(event,var1,var2,var3))
     cant_v += 1
 
@@ -27,7 +27,7 @@ def add_arista(event,i,x,y):
     global pos_x,pos_y,j,grafo_n,is_dirigido,cant_a
     global click
     if click:
-        print("insertando arista end =",+i)
+        print("insertando arista end =",chr(97+i))
         lienzo.pack()
         if is_dirigido.get():
             if i == j:
@@ -52,7 +52,7 @@ def add_arista(event,i,x,y):
         cant_a += 1
         click=0
     else:
-        print("insertando arista start = ",+i)
+        print("insertando arista start = ",chr(97+i))
         pos_x = x
         pos_y = y
         j = i
@@ -63,11 +63,15 @@ def detalles():
     menu = tk.Tk()
     menu.geometry('300x300')
     menu.title('Detalles de grafo')
+    for ii in range(0,cant_v):
+        for jj in range(0,cant_v):
+            ixj = tk.Entry(menu, width=5)
+            ixj.grid(row=1+ii,column=1+jj)
+            ixj.insert(tk.END, grafo_n.get_n(ii,jj))
     btn = tk.Button(menu,text="Salir",command=menu.destroy)
-    btn.pack()
     menu.mainloop
     print("matriz de adyacencia")
-    grafo_n.print_mat(cant_v)
+    #grafo_n.print_mat(cant_v)
     print("grado del grafo: ",+grafo_n.get_grado(cant_v))
     #grafo_n.get_grado(cant_v) obtiene la cantidad total grado del grafo 
     #cant_aristas = (grafo_n.get_grado(cant_v) // 2)
