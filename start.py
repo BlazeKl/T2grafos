@@ -116,6 +116,7 @@ def detalles():
     print("Cantidad aristas: ", +cant_a) 
     print("Num cromatico: ", grafo_n.do_cromatico(cant_v))
     print(grafo_n.do_colorear(cant_v))
+    print(grafo_n.euleriano(cant_v))
     
 
 def algoritmos():

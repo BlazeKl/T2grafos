@@ -36,3 +36,6 @@ class grafo:
         res = l_colorear(self.g_matr,limit)
         return res
 
+    def euleriano(self,limit):
+        res = is_euleriano(self.g_matr,limit)
+        return res
