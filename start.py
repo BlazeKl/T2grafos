@@ -3,12 +3,13 @@ import tkinter as tk
 from funciones.clasegrafo import grafo
 
 #variables
-global pos_x,pos_y,click,vert,cant_v,j,grafo_n,is_dirigido
+global pos_x,pos_y,click,vert,cant_v,cant_a,j,grafo_n,is_dirigido
 pos_x = 0
 pos_y = 0
 click = 0
 vert = [0 for x in range(999)]
 cant_v = 0
+cant_a = 0
 j = 0
 grafo_n = grafo(1000)
 
@@ -23,7 +24,7 @@ def add_nodo(event):
     cant_v += 1
 
 def add_arista(event,i,x,y):
-    global pos_x,pos_y,j,grafo_n,is_dirigido
+    global pos_x,pos_y,j,grafo_n,is_dirigido,cant_a
     global click
     if click:
         print("insertando arista end =",+i)
@@ -31,20 +32,24 @@ def add_arista(event,i,x,y):
         if is_dirigido.get():
             if i == j:
                 print("bucle")
-                arista = lienzo.create_line(x,y,x-50,y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2,smooth=1)
+                arista = lienzo.create_line(x,y,x-25,y,x-25,y+25,x,y+25,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2,smooth=1)
             else:
-                arista = lienzo.create_line(pos_x,pos_y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2)
+                arista = lienzo.create_line(pos_x,pos_y,x,y,arrow=tk.LAST,arrowshape=(16,20,6),fill='black',width=2)  
             grafo_n.sum_n(1,j,i)
+
         else:
             if i == j:
                 print("bucle")
-                arista = lienzo.create_line(x,y,x-50,y-50,x,y,fill='black',width=2,smooth=1)
+                arista = lienzo.create_line(x,y,x-25,y,x-25,y+25,x,y+25,x,y,fill='black',width=2,smooth=1)
+                grafo_n.sum_n(1,i,j)
             else:
                 arista = lienzo.create_line(pos_x,pos_y,x,y,fill='black',width=2)
-            grafo_n.sum_n(1,i,j)
-            grafo_n.sum_n(1,j,i)
+                grafo_n.sum_n(1,i,j)
+                grafo_n.sum_n(1,j,i)
+
         lienzo.tag_lower(arista)
         print("(",+x,",",+y,")")
+        cant_a += 1
         click=0
     else:
         print("insertando arista start = ",+i)
@@ -65,8 +70,10 @@ def detalles():
     grafo_n.print_mat(cant_v)
     print("grado del grafo: ",+grafo_n.get_grado(cant_v))
     #grafo_n.get_grado(cant_v) obtiene la cantidad total grado del grafo 
-    cant_aristas = (grafo_n.get_grado(cant_v) // 2)
-    print("Cantidad aristas: ",+cant_aristas) 
+    #cant_aristas = (grafo_n.get_grado(cant_v) // 2)
+    print("Cantidad aristas: ",+cant_a) 
+    
+    
 
 def algoritmos():
     menu = tk.Tk()
@@ -75,12 +82,12 @@ def algoritmos():
     btn = tk.Button(menu,text="Salir",command=menu.destroy)
     btn.pack()
     menu.mainloop
-    print("funcion para mostrar menu de algoritmos")
+    print("menu de algoritmos")
 
 
 def limpiar_canvas():
     print("limpiar canvas")
-    global pos_x,pos_y,click,vert,cant_v,grafo_n
+    global pos_x,pos_y,click,vert,cant_v,cant_a,grafo_n
     lienzo.delete("all")
     pos_x=0
     pos_y=0
@@ -88,11 +95,8 @@ def limpiar_canvas():
     click = 0
     vert = [0 for x in range(999)]
     cant_v = 0
+    cant_a = 0
     grafo_n = grafo(1000)
-
-
-#area de pruebas
-#def num_reg(x):
 
 #inicio ventana
 ventana = tk.Tk()
@@ -101,7 +105,6 @@ ventana.title('Editor de grafos')
 lienzo = tk.Canvas(ventana,width=640,height=480,background='light blue')
 lienzo.place(x=0,y=0)
 lienzo.bind('<Button-1>',add_nodo)
-#lienzo.bind('<Button-2>',limpiar_canvas)
 btn_1 = tk.Button(ventana,text="Detalles",command=detalles)
 btn_1.pack()
 btn_1.place(x=0,y=482)
