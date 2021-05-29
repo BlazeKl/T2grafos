@@ -110,6 +110,14 @@ def detalles():
     tabla = tk.Entry(frame3, width=5, bg='black', fg='white')
     tabla.grid(row=3, column=1)
     tabla.insert(tk.END, grafo_n.do_cromatico(cant_v))
+    text = tk.Label(frame3, text="Es euleriano : ")
+    text.grid(row=4, column=0)
+    tabla = tk.Entry(frame3, width=5, bg='black', fg='white')
+    tabla.grid(row=4, column=1)
+    if grafo_n.euleriano(cant_v):
+        tabla.insert(tk.END, "Si")
+    else:
+        tabla.insert(tk.END, "No")
     menu.mainloop
     grafo_n.print_mat(cant_v)
     print("grado del grafo: ", +grafo_n.get_grado(cant_v))
