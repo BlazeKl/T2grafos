@@ -8,4 +8,3 @@ def cantidad_regiones(a,v):
     regiones = 2 - v + a
     return regiones
 
-    
