@@ -4,3 +4,4 @@ grafos en python
 ## Dependencias
 * Python
 * Tk
+* NumPy

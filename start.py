@@ -3,7 +3,7 @@ import tkinter as tk
 from funciones.clasegrafo import grafo
 
 #variables
-global pos_x, pos_y, click, vert, cant_v, cant_a, j, grafo_n,is_dirigido
+global pos_x, pos_y, click, vert, cant_v, cant_a, j, grafo_n,is_dirigido,m_peso
 pos_x = 0
 pos_y = 0
 click = 0
@@ -12,6 +12,7 @@ cant_v = 0
 cant_a = 0
 j = 0
 grafo_n = grafo(1000)
+m_peso = grafo(1000)
 
 #funciones para canvas
 def add_nodo(event):
@@ -35,17 +36,17 @@ def add_arista(event,i, x, y):
                 arista = lienzo.create_line(x, y, x-25, y, x-25, y+25, x, y+25, x, y, arrow=tk.LAST, arrowshape=(16,20,6), fill='black', width=2, smooth=1)
             else:
                 arista = lienzo.create_line(pos_x, pos_y, x, y, arrow=tk.LAST, arrowshape=(16,20,6), fill='black', width=2)  
-            grafo_n.sum_n(1,j,i)
+            grafo_n.set_n(1,j,i)
 
         else:
             if i == j:
                 print("bucle")
                 arista = lienzo.create_line(x, y, x-25, y, x-25, y+25, x, y+25, x, y, fill='black', width=2, smooth=1)
-                grafo_n.sum_n(1,i,j)
+                grafo_n.set_n(1,i,j)
             else:
                 arista = lienzo.create_line(pos_x, pos_y, x, y, fill='black', width=2)
-                grafo_n.sum_n(1,i,j)
-                grafo_n.sum_n(1,j,i)
+                grafo_n.set_n(1,i,j)
+                grafo_n.set_n(1,j,i)
 
         lienzo.tag_lower(arista)
         print("(",+x,",",+y,")")
@@ -88,31 +89,58 @@ def detalles():
     tabla = tk.Entry(frame2, width=5)
     tabla.grid(row=0, column=0)
     tabla.insert(tk.END, "M")
-    frame3 = tk.Frame(menu)
+    frame3 = tk.Frame(menu) 
     frame3.pack(side="top", fill="both")
-    text = tk.Label(frame3, text="Cantidad de vertices: ")
+    text = tk.Label(frame3, text="Matriz de camino")
     text.grid(row=0, column=0)
-    tabla = tk.Entry(frame3, width=5, bg='black', fg='white')
+    #
+    frame4 = tk.Frame(menu) 
+    frame4.pack(side="top", fill="both")
+    for ii in range(0, cant_v+1):
+        tabla = tk.Entry(frame4, width=5, bg='green', fg='white')
+        tabla.grid(row=0, column=ii)
+        tabla.insert(tk.END, chr(96+ii))
+    for ii in range(0, cant_v+1):
+        tabla = tk.Entry(frame4, width=5, bg='green', fg='white')
+        tabla.grid(row=ii, column=0)
+        tabla.insert(tk.END, chr(96+ii))
+    for ii in range(0, cant_v):
+        for jj in range(0, cant_v):
+            if grafo_n.get_camino(cant_v)[ii][jj] > 0:
+                tabla = tk.Entry(frame4, width=5, bg='blue', fg='white')
+            else:
+                tabla = tk.Entry(frame4, width=5, bg='black', fg='white')
+            tabla.grid(row=1+ii, column=1+jj)
+            tabla.insert(tk.END, grafo_n.get_camino(cant_v)[ii][jj])
+    tabla = tk.Entry(frame4, width=5)
+    tabla.grid(row=0, column=0)
+    tabla.insert(tk.END, "C")
+    #
+    frame5 = tk.Frame(menu)
+    frame5.pack(side="top", fill="both")
+    text = tk.Label(frame5, text="Cantidad de vertices: ")
+    text.grid(row=0, column=0)
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=0, column=1)
     tabla.insert(tk.END, cant_v)
-    text = tk.Label(frame3, text="Cantidad de aristas: ")
+    text = tk.Label(frame5, text="Cantidad de aristas: ")
     text.grid(row=1, column=0)
-    tabla = tk.Entry(frame3, width=5, bg='black', fg='white')
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=1, column=1)
     tabla.insert(tk.END, cant_a)
-    text = tk.Label(frame3, text="Grado del grafo: ")
+    text = tk.Label(frame5, text="Grado del grafo: ")
     text.grid(row=2, column=0)
-    tabla = tk.Entry(frame3, width=5, bg='black', fg='white')
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=2, column=1)
     tabla.insert(tk.END, grafo_n.get_grado(cant_v))
-    text = tk.Label(frame3, text="Numero cromatico : ")
+    text = tk.Label(frame5, text="Numero cromatico : ")
     text.grid(row=3, column=0)
-    tabla = tk.Entry(frame3, width=5, bg='black', fg='white')
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=3, column=1)
     tabla.insert(tk.END, grafo_n.do_cromatico(cant_v))
-    text = tk.Label(frame3, text="Es euleriano : ")
+    text = tk.Label(frame5, text="Es euleriano : ")
     text.grid(row=4, column=0)
-    tabla = tk.Entry(frame3, width=5, bg='black', fg='white')
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=4, column=1)
     if grafo_n.euleriano(cant_v):
         tabla.insert(tk.END, "Si")
@@ -125,15 +153,22 @@ def detalles():
     print("Num cromatico: ", grafo_n.do_cromatico(cant_v))
     print(grafo_n.do_colorear(cant_v))
     print(grafo_n.euleriano(cant_v))
-    
+    grafo_n.get_camino(cant_v)
+
+def colorear_g():
+    arrgl = grafo_n.do_colorear(cant_v)
+    for ii in range(0,cant_v):
+        lienzo.itemconfig(vert[ii], fill='blue')
 
 def algoritmos():
     menu = tk.Tk()
-    menu.title('Algoritmos')
-    btn = tk.Button(menu, text="Salir", command=menu.destroy)
+    menu.title('Funciones')
+    frame1 = tk.Frame(menu)
+    frame1.pack(side="top", fill="both")
+    btn = tk.Button(frame1, text="Colorear grafo", command=colorear_g)
     btn.pack()
     menu.mainloop
-    print("menu de algoritmos")
+    print("Menu de funciones")
 
 
 def limpiar_canvas():
@@ -163,7 +198,7 @@ frame_btn = tk.Frame(ventana)
 frame_btn.pack(side="top", fill="both")
 btn= tk.Button(frame_btn, text="Detalles", command=detalles)
 btn.grid(row=0, column=0)
-btn = tk.Button(frame_btn, text="Operaciones", command=algoritmos)
+btn = tk.Button(frame_btn, text="Funciones", command=algoritmos)
 btn.grid(row=0, column=1)
 btn = tk.Button(frame_btn, text="Limpiar", command=limpiar_canvas)
 btn.grid(row=0, column=2)

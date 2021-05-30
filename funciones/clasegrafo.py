@@ -3,6 +3,7 @@ from .hamiltoniano import is_hamiltoniano
 from .gradosaristas import gradosgrafo
 from .numcromatico import num_cromatico
 from .colorear import l_colorear
+from .camino import m_camino
 
 class grafo:
     def __init__(self,N):
@@ -25,17 +26,16 @@ class grafo:
             print("\n")
 
     def get_grado(self,limit):
-        res = gradosgrafo(self.g_matr,limit)
-        return res
+        return gradosgrafo(self.g_matr,limit)
 
     def do_cromatico(self,limit):
-        res = num_cromatico(self.g_matr,limit)
-        return res
+        return num_cromatico(self.g_matr,limit)
 
     def do_colorear(self,limit):
-        res = l_colorear(self.g_matr,limit)
-        return res
+        return l_colorear(self.g_matr,limit)
 
     def euleriano(self,limit):
-        res = is_euleriano(self.g_matr,limit)
-        return res
+        return is_euleriano(self.g_matr,limit)
+
+    def get_camino(self,limit):
+        return m_camino(self.g_matr,limit)

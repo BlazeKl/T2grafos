@@ -5,6 +5,8 @@
 
 
 def l_colorear(x,n):
+    if n == 0:
+        return 0
 
     mayor=0
     for i in range(0,n):
