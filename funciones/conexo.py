@@ -3,7 +3,7 @@
 #n es la cantidad de vertices o nodos
 from numpy.linalg import matrix_power
 
-def matriz_c(x,n):
+def is_conexo(x,n):
     arrgl = [[0 for x in range(n)] for y in range(n)]
     matc=[[0 for x in range(n)] for y in range(n)]
 
@@ -14,7 +14,12 @@ def matriz_c(x,n):
     for i in range(0,n):
         matc += matrix_power(arrgl, i) # funcion que eleva la matriz a n y va guardando la sumatoria hasta n
                                         # ej matriz elev 0 + matriz elev 1 + ... + matriz elev n
-    return matc
-
-# LA FUNCION RETORNA LA MATRIZ C DEL GRAFO
-# NO RETORNA EL CAMINO DEL GRAFO
+  #  return matc     #RETORNA UNA MATRIZ C
+    is_con = True
+    for i in range(0,n):
+        for j in range(0,n):
+            if matc[i][j] == 0 :
+                is_con = False
+    
+    print("El grafo es conexo?")
+    return is_con

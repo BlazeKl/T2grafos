@@ -86,14 +86,13 @@ def detalles():
                 tabla = tk.Entry(frame2, width=5, bg='black', fg='white')
             tabla.grid(row=1+ii, column=1+jj)
             tabla.insert(tk.END, grafo_n.get_n(ii,jj))
-    tabla = tk.Entry(frame2, width=5)
+    tabla = tk.Entry(frame2, width=5, bg='green', fg='white')
     tabla.grid(row=0, column=0)
     tabla.insert(tk.END, "M")
     frame3 = tk.Frame(menu) 
     frame3.pack(side="top", fill="both")
-    text = tk.Label(frame3, text="Matriz de camino")
+    text = tk.Label(frame3, text="Matriz C")
     text.grid(row=0, column=0)
-    #
     frame4 = tk.Frame(menu) 
     frame4.pack(side="top", fill="both")
     for ii in range(0, cant_v+1):
@@ -112,10 +111,9 @@ def detalles():
                 tabla = tk.Entry(frame4, width=5, bg='black', fg='white')
             tabla.grid(row=1+ii, column=1+jj)
             tabla.insert(tk.END, grafo_n.get_camino(cant_v)[ii][jj])
-    tabla = tk.Entry(frame4, width=5)
+    tabla = tk.Entry(frame4, width=5, bg='green', fg='white')
     tabla.grid(row=0, column=0)
     tabla.insert(tk.END, "C")
-    #
     frame5 = tk.Frame(menu)
     frame5.pack(side="top", fill="both")
     text = tk.Label(frame5, text="Cantidad de vertices: ")
@@ -146,6 +144,14 @@ def detalles():
         tabla.insert(tk.END, "Si")
     else:
         tabla.insert(tk.END, "No")
+    text = tk.Label(frame5, text="Es conexo : ")
+    text.grid(row=5, column=0)
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
+    tabla.grid(row=5, column=1)
+    if grafo_n.conexo(cant_v):
+        tabla.insert(tk.END, "Si")
+    else:
+        tabla.insert(tk.END, "No")
     menu.mainloop
     grafo_n.print_mat(cant_v)
     print("grado del grafo: ", +grafo_n.get_grado(cant_v))
@@ -154,6 +160,7 @@ def detalles():
     print(grafo_n.do_colorear(cant_v))
     print(grafo_n.euleriano(cant_v))
     grafo_n.get_camino(cant_v)
+    print(grafo_n.conexo(cant_v))
 
 def colorear_g():
     arrgl = grafo_n.do_colorear(cant_v)

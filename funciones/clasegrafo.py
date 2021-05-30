@@ -3,7 +3,8 @@ from .hamiltoniano import is_hamiltoniano
 from .gradosaristas import gradosgrafo
 from .numcromatico import num_cromatico
 from .colorear import l_colorear
-from .camino import m_camino
+from .camino import matriz_c
+from .conexo import is_conexo
 
 class grafo:
     def __init__(self,N):
@@ -38,4 +39,7 @@ class grafo:
         return is_euleriano(self.g_matr,limit)
 
     def get_camino(self,limit):
-        return m_camino(self.g_matr,limit)
+        return matriz_c(self.g_matr,limit)
+
+    def conexo(self,limit):
+        return is_conexo(self.g_matr,limit)
