@@ -21,5 +21,5 @@ def is_conexo(x,n):
             if matc[i][j] == 0 :
                 is_con = False
     
-    print("El grafo es conexo?")
+    print("¿El grafo es conexo?")
     return is_con

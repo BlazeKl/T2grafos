@@ -3,7 +3,7 @@ import tkinter as tk
 from funciones.clasegrafo import grafo
 
 #variables
-global pos_x, pos_y, click, vert, cant_v, cant_a, j, grafo_n,is_dirigido,m_peso
+global pos_x, pos_y, click, vert, cant_v, cant_a, j, grafo_n,is_dirigido,m_peso,colors
 pos_x = 0
 pos_y = 0
 click = 0
@@ -165,7 +165,7 @@ def detalles():
 def colorear_g():
     arrgl = grafo_n.do_colorear(cant_v)
     for ii in range(0,cant_v):
-        lienzo.itemconfig(vert[ii], fill='blue')
+        lienzo.itemconfig(vert[ii], fill=arrgl[ii])
 
 def algoritmos():
     menu = tk.Tk()

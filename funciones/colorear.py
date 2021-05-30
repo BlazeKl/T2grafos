@@ -5,6 +5,7 @@
 
 
 def l_colorear(x,n):
+    colors = ["red","blue","green","white","black","orange","navy","dark green","yellow2","brown1","gray50","DodgerBlue4","deep pink","dark green","gold"]
     if n == 0:
         return 0
 
@@ -21,14 +22,14 @@ def l_colorear(x,n):
     arreglo_colores = [0 for x in range(mayor)]
     arreglo_final = [0 for x in range(n)]
     for i in range(0,mayor):
-        arreglo_colores[i]=chr(97+i)
+        arreglo_colores[i]=colors[i]
     for i in range(0,n):
         acum=0
         for j in range(0,n):
             acum+=x[i][j]
         arreglo_grados[i]=acum
 
-    arreglo_final[0]='a'
+    arreglo_final[0]=colors[0]
     for i in range(1,n):
         cont=0
         for j in range(0,i):
