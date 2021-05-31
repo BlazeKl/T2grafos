@@ -13,3 +13,6 @@ grafos en python
 
 ## Run
   ```python GraphEd.py```
+
+## Compilar con pyinstaller
+```pyinstaller .\GraphEd.py --onefile --noconsole```
