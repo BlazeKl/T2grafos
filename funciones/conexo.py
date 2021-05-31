@@ -22,4 +22,6 @@ def is_conexo(x,n):
                 is_con = False
     
     print("¿El grafo es conexo?")
+    if n == 0:
+        return False
     return is_con
