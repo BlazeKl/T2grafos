@@ -6,7 +6,7 @@
 
 def g_completo(x,n):
     if n>=4:
-        tresAristas=0
+        completo=0
         central=0
         for i in range(0,n):
             cont=0
@@ -14,10 +14,8 @@ def g_completo(x,n):
                 if x[i][j]==1:
                     cont+=1
             if cont==n-1:
-                tresAristas+=1
-            if cont==(n-1):
-                central+=1
-        if central==1 and tresAristas==(n-1):
+                completo+=1
+        if completo==n:
             return True
         else:
             return False
