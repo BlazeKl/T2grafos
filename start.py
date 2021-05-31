@@ -218,6 +218,11 @@ def detalles():
         tabla.insert(tk.END, "Si")
     else:
         tabla.insert(tk.END, "No")
+    text = tk.Label(frame5, text="Numero de regiones : ")
+    text.grid(row=10, column=0)
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
+    tabla.grid(row=10, column=1)
+    tabla.insert(tk.END, grafo_n.n_regiones(cant_a,cant_v))
     menu.mainloop
 
     grafo_n.print_mat(cant_v)

@@ -5,5 +5,8 @@
 # v numero de vertices (es el largo del arreglo, matriz n*n cuadrada)
 
 def cantidad_regiones(a,v):
-    regiones = 2 - v + a
-    return regiones
+    if a >= 1 and v >= 2:
+        regiones = 2 - v + a
+        return regiones
+    else:
+        return 0

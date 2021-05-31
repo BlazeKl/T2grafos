@@ -9,6 +9,7 @@ from .rueda import g_rueda
 from .completo import g_completo
 from .simple import g_simple
 from .regular import g_regular
+from .numregiones import cantidad_regiones
 
 class grafo:
     def __init__(self,N):
@@ -69,3 +70,6 @@ class grafo:
     
     def regular(self,limit):
         return g_regular(self.g_matr,limit)
+
+    def n_regiones(self,a,v):
+        return cantidad_regiones(a,v)
