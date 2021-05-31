@@ -16,7 +16,3 @@ def gradosgrafo(x,n):
 # cant_grados= gradosgrafo(x,n)
 
 # cant_aristas= cant_grados / 2
-
-
-
-

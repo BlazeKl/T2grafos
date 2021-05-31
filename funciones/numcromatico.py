@@ -28,5 +28,3 @@ def num_cromatico(x,n):
         if acum>=mayor:
             mayor=acum    
     return (mayor+1)
-
-

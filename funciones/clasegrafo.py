@@ -5,6 +5,7 @@ from .numcromatico import num_cromatico
 from .colorear import l_colorear
 from .camino import matriz_c
 from .conexo import is_conexo
+from .rueda import g_rueda
 
 class grafo:
     def __init__(self,N):
@@ -53,3 +54,6 @@ class grafo:
 
     def conexo(self,limit):
         return is_conexo(self.g_matr,limit)
+
+    def rueda(self,limit):
+        return g_rueda(self.g_matr,limit)

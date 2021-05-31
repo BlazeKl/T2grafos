@@ -4,9 +4,8 @@
 
 
 
-def rueda(x,n):
+def g_rueda(x,n):
     if n>=4:
-        acum=0
         tresAristas=0
         central=0
         for i in range(0,n):
@@ -20,9 +19,7 @@ def rueda(x,n):
                 central+=1
         if central==1 and tresAristas==(n-1):
             return True
+        else:
+            return False
     else:
         return False
-
-
-
-

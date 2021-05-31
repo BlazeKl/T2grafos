@@ -187,6 +187,14 @@ def detalles():
         tabla.insert(tk.END, "Si")
     else:
         tabla.insert(tk.END, "No")
+    text = tk.Label(frame5, text="Es rueda : ")
+    text.grid(row=6, column=0)
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
+    tabla.grid(row=6, column=1)
+    if grafo_n.rueda(cant_v):
+        tabla.insert(tk.END, "Si")
+    else:
+        tabla.insert(tk.END, "No")
     menu.mainloop
 
     grafo_n.print_mat(cant_v)
@@ -198,6 +206,9 @@ def detalles():
     grafo_n.get_camino(cant_v)
     print(grafo_n.conexo(cant_v))
     grafo_n.print_pes(cant_v)
+    print("Es rueda?")
+    print(grafo_n.rueda(cant_v))
+
 
 def colorear_g():
     arrgl = grafo_n.do_colorear(cant_v)
