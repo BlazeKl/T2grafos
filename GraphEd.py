@@ -265,7 +265,6 @@ def limpiar_canvas():
     lienzo.delete("all")
     pos_x=0
     pos_y=0
-    z=0
     click = 0
     vert = [0 for x in range(999)]
     cant_v = 0
