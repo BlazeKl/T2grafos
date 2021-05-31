@@ -28,7 +28,8 @@ def add_arista(event,i, x, y):
     global click
     if click:
         print("insertando arista end =", chr(97+i))
-        lienzo.pack()
+        if grafo_n.get_p(j,i) == 0:
+                cant_a += 1
         if is_dirigido.get():
             if i == j:
                 print("bucle")
@@ -50,10 +51,8 @@ def add_arista(event,i, x, y):
                 grafo_n.set_n(1,j,i)
                 grafo_n.sum_p(1,i,j)
                 grafo_n.sum_p(1,j,i)
-
         lienzo.tag_lower(arista)
         print("(",+x,",",+y,")")
-        cant_a += 1
         click=0
     else:
         print("insertando arista start = ",chr(97+i))
@@ -151,17 +150,17 @@ def detalles():
     
     frame5 = tk.Frame(menu)
     frame5.grid(row=4, column=0)
-    text = tk.Label(frame5, text="Cantidad de vertices: ")
+    text = tk.Label(frame5, text="Cantidad de vertices : ")
     text.grid(row=0, column=0)
     tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=0, column=1)
     tabla.insert(tk.END, cant_v)
-    text = tk.Label(frame5, text="Cantidad de aristas: ")
+    text = tk.Label(frame5, text="Cantidad de aristas : ")
     text.grid(row=1, column=0)
     tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=1, column=1)
     tabla.insert(tk.END, cant_a)
-    text = tk.Label(frame5, text="Grado del grafo: ")
+    text = tk.Label(frame5, text="Grado del grafo : ")
     text.grid(row=2, column=0)
     tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
     tabla.grid(row=2, column=1)
@@ -195,6 +194,30 @@ def detalles():
         tabla.insert(tk.END, "Si")
     else:
         tabla.insert(tk.END, "No")
+    text = tk.Label(frame5, text="Es completo : ")
+    text.grid(row=7, column=0)
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
+    tabla.grid(row=7, column=1)
+    if grafo_n.completo(cant_v):
+        tabla.insert(tk.END, "Si")
+    else:
+        tabla.insert(tk.END, "No")
+    text = tk.Label(frame5, text="Es regular : ")
+    text.grid(row=8, column=0)
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
+    tabla.grid(row=8, column=1)
+    if grafo_n.regular(cant_v):
+        tabla.insert(tk.END, "Si")
+    else:
+        tabla.insert(tk.END, "No")
+    text = tk.Label(frame5, text="Es simple : ")
+    text.grid(row=9, column=0)
+    tabla = tk.Entry(frame5, width=5, bg='black', fg='white')
+    tabla.grid(row=9, column=1)
+    if grafo_n.simple(cant_v):
+        tabla.insert(tk.END, "Si")
+    else:
+        tabla.insert(tk.END, "No")
     menu.mainloop
 
     grafo_n.print_mat(cant_v)
@@ -208,22 +231,18 @@ def detalles():
     grafo_n.print_pes(cant_v)
     print("Es rueda?")
     print(grafo_n.rueda(cant_v))
+    print("Es completo?")
+    print(grafo_n.completo(cant_v))
+    print("Es regular?")
+    print(grafo_n.regular(cant_v))
+    print("Es simple?")
+    print(grafo_n.simple(cant_v))
 
 
 def colorear_g():
     arrgl = grafo_n.do_colorear(cant_v)
     for ii in range(0,cant_v):
         lienzo.itemconfig(vert[ii], fill=arrgl[ii])
-
-def algoritmos():
-    menu = tk.Tk()
-    menu.title('Funciones')
-    frame1 = tk.Frame(menu)
-    frame1.pack(side="top", fill="both")
-    btn = tk.Button(frame1, text="Colorear grafo", command=colorear_g)
-    btn.pack()
-    menu.mainloop
-    print("Menu de funciones")
 
 
 def limpiar_canvas():
@@ -253,7 +272,7 @@ frame_btn = tk.Frame(ventana)
 frame_btn.pack(side="top", fill="both")
 btn= tk.Button(frame_btn, text="Detalles", command=detalles)
 btn.grid(row=0, column=0)
-btn = tk.Button(frame_btn, text="Funciones", command=algoritmos)
+btn = tk.Button(frame_btn, text="Colorear", command=colorear_g)
 btn.grid(row=0, column=1)
 btn = tk.Button(frame_btn, text="Limpiar", command=limpiar_canvas)
 btn.grid(row=0, column=2)

@@ -6,6 +6,9 @@ from .colorear import l_colorear
 from .camino import matriz_c
 from .conexo import is_conexo
 from .rueda import g_rueda
+from .completo import g_completo
+from .simple import g_simple
+from .regular import g_regular
 
 class grafo:
     def __init__(self,N):
@@ -57,3 +60,12 @@ class grafo:
 
     def rueda(self,limit):
         return g_rueda(self.g_matr,limit)
+
+    def completo(self,limit):
+        return g_completo(self.g_matr,limit)
+
+    def simple(self,limit):
+        return g_simple(self.g_matr,limit)
+    
+    def regular(self,limit):
+        return g_regular(self.g_matr,limit)
