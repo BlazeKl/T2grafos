@@ -8,5 +8,5 @@ def g_nulo(x,n):
     if n==0:
         return True
     else:
-        return True    
+        return False    
     
