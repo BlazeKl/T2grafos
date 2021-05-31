@@ -1,9 +1,10 @@
 #librerias
 import tkinter as tk
 from funciones.clasegrafo import grafo
+from funciones.isomorf import v_isomorfismo
 
 #variables
-global pos_x, pos_y, click, vert, cant_v, cant_a, j, grafo_n,is_dirigido
+global pos_x, pos_y, click, vert, cant_v, cant_a, j, grafo_n, is_dirigido
 pos_x = 0
 pos_y = 0
 click = 0
@@ -263,6 +264,7 @@ def limpiar_canvas():
     cant_a = 0
     grafo_n = grafo(1000)
 
+
 #inicio ventana
 ventana = tk.Tk()
 ventana.geometry('640x510+0+0')
@@ -279,9 +281,11 @@ btn= tk.Button(frame_btn, text="Detalles", command=detalles)
 btn.grid(row=0, column=0)
 btn = tk.Button(frame_btn, text="Colorear", command=colorear_g)
 btn.grid(row=0, column=1)
-btn = tk.Button(frame_btn, text="Limpiar", command=limpiar_canvas)
+btn = tk.Button(frame_btn, text="Comparar", command=lambda: v_isomorfismo(grafo_n,cant_v,is_dirigido.get()))
 btn.grid(row=0, column=2)
+btn = tk.Button(frame_btn, text="Limpiar", command=limpiar_canvas)
+btn.grid(row=0, column=3)
 is_dirigido=tk.IntVar()
 cbox_1 = tk.Checkbutton(frame_btn, text="Dirigido", variable=is_dirigido, onvalue=1, offvalue=0, command=limpiar_canvas, fg="green")
-cbox_1.grid(row=0,column=3)
+cbox_1.grid(row=0,column=4)
 ventana.mainloop()
