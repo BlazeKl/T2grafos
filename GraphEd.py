@@ -1,3 +1,11 @@
+#GraphEdUtem, Editor de grafos
+#1,2021
+#Felipe Perez Cares
+#Alex Bidart Orellana
+#Alex Pino Moya
+#Pablo Sepulveda Fernandez
+#Oscar Munos Retamal
+#
 #librerias
 import tkinter as tk
 from funciones.clasegrafo import grafo
